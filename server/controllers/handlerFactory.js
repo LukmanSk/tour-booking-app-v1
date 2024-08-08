@@ -1,7 +1,5 @@
-
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
-const APIFeatures = require("../utils/apiFeature");
 
 /**
  * Create a new document in the database.
@@ -102,5 +100,3 @@ exports.deleteOne = (Model) =>
       data: null,
     });
   });
-
-
