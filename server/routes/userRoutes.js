@@ -9,6 +9,7 @@ router
   .route("/profile")
   .patch(
     authController.protect,
+    userController.uploadUserPhoto,
     userController.updateMe,
     userController.updateUser
   );
