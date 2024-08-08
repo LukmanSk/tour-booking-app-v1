@@ -88,7 +88,7 @@ exports.restrictTo = (...roles) => {
       return next(
         new AppError(
           `Unauthorized Access. You don't have permisson to perform this action.`,
-          403
+          401
         )
       );
     }
