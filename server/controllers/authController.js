@@ -84,7 +84,7 @@ exports.logout = catchAsync(async (req, res, next) => {
 });
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.role)) {
+    if (!roles.includes(req.user.role)) {
       return next(
         new AppError(
           `Unauthorized Access. You don't have permisson to perform this action.`,
