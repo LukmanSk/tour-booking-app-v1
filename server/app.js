@@ -1,6 +1,7 @@
 const express = require("express");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
+const path = require("path");
 
 const userRouter = require("./routes/userRoutes");
 const authRouter = require("./routes/authRoutes");
@@ -10,6 +11,7 @@ const app = express();
 // MIDDLEWARES
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Tasks:
 
