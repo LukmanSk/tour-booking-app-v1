@@ -4,17 +4,17 @@ const tourController = require("../controllers/tourController");
 
 const router = express.Router();
 
-router.use(authController.protect, authController.restrictTo("admin"));
+router.use(authController.protect);
 
 router
   .route("/tours")
-  .post(tourController.createTour)
+  .post(authController.restrictTo("admin"), tourController.createTour)
   .get(tourController.getAllTours);
 
 router
   .route("/tours/:id")
-  .patch(tourController.updateTour)
-  .delete(tourController.delteTour)
+  .patch(authController.restrictTo("admin"),tourController.updateTour)
+  .delete(authController.restrictTo("admin"), tourController.delteTour)
   .get(tourController.getTour);
 
 module.exports = router;
