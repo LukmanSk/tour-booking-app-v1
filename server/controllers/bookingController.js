@@ -114,9 +114,26 @@ exports.createBooking = catchAsync(async (req, res, next) => {
 exports.getAllBookings = factory.getAll(Booking, [
   { path: "user", select: "name" },
   { path: "payment", select: "amount paymentMethod paymentStatus" },
-  {path:"tour", select:"title location tourOwner", populate: {
-    path: 'tourOwner',
-    select:"name",
-    model: 'User'
-  }}
+  {
+    path: "tour",
+    select: "title location tourOwner",
+    populate: {
+      path: "tourOwner",
+      select: "name",
+      model: "User",
+    },
+  },
+]);
+exports.getBooking = factory.getOne(Booking, [
+  { path: "user", select: "name" },
+  { path: "payment", select: "amount paymentMethod paymentStatus" },
+  {
+    path: "tour",
+    select: "title location tourOwner",
+    populate: {
+      path: "tourOwner",
+      select: "name",
+      model: "User",
+    },
+  },
 ]);

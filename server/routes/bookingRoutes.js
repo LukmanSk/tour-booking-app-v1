@@ -15,4 +15,6 @@ router
   .post(bookingController.createBooking)
   .get(bookingController.getAllBookings);
 
+router.route("/:id").get(bookingController.getBooking);
+
 module.exports = router;
