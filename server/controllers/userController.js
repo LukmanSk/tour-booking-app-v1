@@ -35,10 +35,15 @@ exports.updateMe = (req, res, next) => {
     return next(new AppError(`You don't have permission to do that`, 400));
   }
 
-
   if (req.file) req.body.avatar = req.file.filename;
-
 
   next();
 };
+
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user._id;
+  next();
+};
 exports.updateUser = factory.updateOne(User);
+
+exports.getUser = factory.getOne(User);

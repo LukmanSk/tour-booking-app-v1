@@ -137,3 +137,9 @@ exports.getBooking = factory.getOne(Booking, [
     },
   },
 ]);
+
+exports.cancelBooking = (req, res, next) => {
+  req.body.bookingStatus = "canceled";
+  next();
+};
+exports.updateBooking = factory.updateOne(Booking);
