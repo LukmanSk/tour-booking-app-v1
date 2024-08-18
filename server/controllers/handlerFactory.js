@@ -49,17 +49,15 @@ exports.getOne = (Model, populateOptions) =>
  */
 exports.getAll = (Model, populateOptions) =>
   catchAsync(async (req, res, next) => {
-    const queries = req.query
     let filter = {};
     if (req.user.role !== "admin") filter = { user: req.user._id };
-    if(queries) {
-      filter = {
-        ...queries
-      }
-    }
+
     let features;
     if (populateOptions) {
-      features = new APIFeatures(Model.find(filter).populate(populateOptions), req.query)
+      features = new APIFeatures(
+        Model.find(filter).populate(populateOptions),
+        req.query
+      )
         .filter()
         .sort()
         .limitFields()
