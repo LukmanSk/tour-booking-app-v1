@@ -7,23 +7,27 @@ const router = express.Router();
 // user bookings
 router.use("/bookings", bookingRouter);
 
+router.use(authController.protect);
+
 router
   .route("/")
-  .get(
-    authController.protect,
-    authController.restrictTo("admin"),
-    userController.getAllUsers
-  );
+  .get(authController.restrictTo("admin"), userController.getAllUsers);
 router
   .route("/profile")
   .patch(
-    authController.protect,
-
     userController.uploadUserPhoto,
-
     userController.updateMe,
     userController.updateUser
   )
-  .get(authController.protect, userController.getMe, userController.getUser);
+  .get(authController.protect, userController.getMe, userController.getUser)
+  .delete(userController.getMe, userController.deleteUser);
+
+router.use(authController.restrictTo("admin"));
+
+router
+  .route("/:id")
+  .get(userController.getUser)
+  .patch(userController.updateUser)
+  .delete(userController.deleteUser);
 
 module.exports = router;
